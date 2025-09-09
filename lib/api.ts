@@ -188,6 +188,27 @@ export const getProductsByCategory = api.getProductsByCategory
 export const getDashboardStats = dashboardApi.getStats
 export const createProduct = api.createProduct
 
+// Orders API functions
+export const getOrders = async () => {
+  try {
+    const orders = await apiRequest<any[]>('/ecommerce-orders')
+    // ตรวจสอบว่าข้อมูลที่ได้รับเป็น array หรือไม่
+    const validOrders = Array.isArray(orders) ? orders : []
+    return {
+      data: validOrders,
+      success: true,
+      timestamp: new Date().toISOString()
+    }
+  } catch (error) {
+    console.error('Error loading orders:', error)
+    return {
+      data: [],
+      success: false,
+      timestamp: new Date().toISOString()
+    }
+  }
+}
+
 // Utility functions
 export const buildQueryString = (params: Record<string, any>): string => {
   const searchParams = new URLSearchParams()

@@ -14,6 +14,7 @@ import { syncOrders } from '@/lib/sync'
 import { ShoppingCart, ArrowLeft } from 'lucide-react'
 import { useQueryClient } from '@tanstack/react-query'
 import { createOrder, batchUpdateProductStocks, getProducts, getProductById, updateProductStock } from '@/lib/api'
+import { useToast } from '@/components/providers/ToastProvider'
 
 export default function CartPage() {
   const { items, totalItems, totalPrice, clearCart } = useCart()
@@ -21,6 +22,7 @@ export default function CartPage() {
   const [orderSuccess, setOrderSuccess] = useState(false)
   const [orderError, setOrderError] = useState<string | null>(null)
   const queryClient = useQueryClient()
+  const { showToast } = useToast()
 
   useEffect(() => {
     // ลอง sync ตอน mount
@@ -117,10 +119,22 @@ export default function CartPage() {
 
     setOrderSuccess(true)
     clearCart()
+    showToast({
+      message: 'สั่งซื้อสำเร็จ! ขอบคุณสำหรับการสั่งซื้อ',
+      variant: 'success',
+      position: 'top-center',
+      duration: 3000
+    })
     setTimeout(() => setOrderSuccess(false), 2500)
   } catch (err) {
     console.error(err)
     setOrderError('เกิดข้อผิดพลาดในการบันทึกออเดอร์ กรุณาลองใหม่')
+    showToast({
+      message: 'เกิดข้อผิดพลาดในการบันทึกออเดอร์ กรุณาลองใหม่',
+      variant: 'error',
+      position: 'top-center',
+      duration: 5000
+    })
   }
 }
 
