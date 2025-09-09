@@ -1,8 +1,9 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import QueryProvider from '@/components/providers/QueryProvider'
 import { CartProvider } from '@/components/providers/CartProvider'
+import QueryProvider from '@/components/providers/QueryProvider'
+import { ToastProvider } from '@/components/providers/ToastProvider'
 import Navigation from '@/components/layout/Navigation'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -29,7 +30,8 @@ export default function RootLayout({
       <body className={`${inter.className} h-full antialiased`}>
         <QueryProvider>
           <CartProvider>
-            <div className="min-h-full">
+            <ToastProvider>
+              <div className="min-h-full">
             <header className="bg-white shadow-sm border-b border-gray-200">
               <div className="container">
                 <div className="flex items-center justify-between h-16">
@@ -52,7 +54,8 @@ export default function RootLayout({
                 </div>
               </div>
             </footer>
-            </div>
+              </div>
+            </ToastProvider>
           </CartProvider>
         </QueryProvider>
       </body>
