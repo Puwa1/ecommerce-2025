@@ -21,12 +21,12 @@ export default function Navigation() {
       >
         สินค้า
       </Link>
-      {/* <Link 
+      <Link 
         href="/orders" 
         className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
       >
-        Orders
-      </Link> */}
+        ประวัติการสั่งซื้อ
+      </Link>
       <Link 
         href="/cart" 
         className="relative text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors flex items-center gap-2"
